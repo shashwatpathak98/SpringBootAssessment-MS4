@@ -33,7 +33,9 @@ public class CollegeService {
         College college = repo.findById(id).orElse(null);
         Student[] students = restTemplate.getForObject("http://STUDENT-SERVICE/student/findAllByCollege/"+ college.getCollegeId(), Student[].class);
         response.setCollege(college);
-        response.setStudents(Arrays.asList(students));
+        List<Student> studentList = Arrays.asList(students);
+        studentList.sort((s1, s2) -> s1.getStudentName().compareTo(s2.getStudentName()));
+        response.setStudents(studentList);
 
         return response;
     }
@@ -45,9 +47,16 @@ public class CollegeService {
             ResponseTemplateVO innerResponse = new ResponseTemplateVO();
             Student[] students = restTemplate.getForObject("http://STUDENT-SERVICE/student/findAllByCollegeNameSorted/"+ c.getCollegeId(), Student[].class);
             innerResponse.setCollege(c);
-            innerResponse.setStudents(Arrays.asList(students));
+            List<Student> studentList = Arrays.asList(students);
+            studentList.sort((s1, s2) -> s1.getStudentName().compareTo(s2.getStudentName()));
+            innerResponse.setStudents(studentList);
             response.add(innerResponse);
         }
         return response;
+    }
+
+    public College getCollegeIdByName(String name) {
+        College college = repo.findByCollegeName(name);
+        return college;
     }
 }

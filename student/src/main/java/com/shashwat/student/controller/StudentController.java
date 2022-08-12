@@ -40,6 +40,13 @@ public class StudentController {
         return studs;
     }
 
+    @GetMapping("/findStudentsByStream/{stream}")
+    public List<Student> getStudentsByStream(@PathVariable String stream) {
+        List<Student> students = service.findByStream(stream);
+        students.sort((s1, s2) -> s2.getAge() - s1.getAge());
+        return students;
+    }
+
     @ExceptionHandler(NoSuchElementException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public StudentError handleNoSuchElementException(NoSuchElementException exception) {

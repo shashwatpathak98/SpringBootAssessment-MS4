@@ -29,6 +29,11 @@ public class CollegeController {
         return service.getAllCollegeInfo(collId);
     }
 
+    @GetMapping("/getCollegeIdByName/{name}")
+    public College getCollegeIdByName(@PathVariable String name) {
+        return service.getCollegeIdByName(name);
+    }
+
     @GetMapping("/getAllCollegeAndStudents")
     public List<ResponseTemplateVO> getAllCollegeAndStudents() {
         return service.getAllCollegesInfo();

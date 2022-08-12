@@ -18,6 +18,7 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long rollNo;
     private String studentName;
+    private String CollegeName;
     private Long collegeId;
     private Integer age;
     private String gender;

@@ -9,11 +9,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.NoSuchElementException;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -47,11 +44,13 @@ public class StudentControllerTests {
         mockStud1.setStudentName("shashwat");
         mockStud1.setAge(24);
         mockStud1.setCollegeId(1L);
+        mockStud1.setCollegeName("College1");
         when(service.getStudentById(1L)).thenReturn(mockStud1);
         this.mockMvc.perform(get("/student/getStudent/1")).andExpect(status().isOk()).andExpect(content().json("{" +
                 "    \"rollNo\": 1," +
                 "    \"studentName\": \"shashwat\"," +
                 "    \"collegeId\": 1,\n" +
+                "    \"collegeName\": \"College1\",\n" +
                 "    \"age\": 24,\n" +
                 "    \"gender\": \"male\"\n" +
                 "}"));
