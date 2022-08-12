@@ -11,6 +11,7 @@ public class Student {
     private Long rollNo;
     private String studentName;
     private Long collegeId;
+    private String stream;
     private String collegeName;
     private Integer age;
     private String gender;
